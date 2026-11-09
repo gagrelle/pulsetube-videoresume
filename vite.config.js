@@ -9,6 +9,7 @@ import { defineConfig } from 'vite';
  * - Static SEO assets (favicon, robots, sitemap, manifest, OG image) live in /public.
  */
 export default defineConfig({
+  base: './',
   css: {
     transformer: 'lightningcss',
     lightningcss: {
