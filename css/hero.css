@@ -1,0 +1,441 @@
+/* ==========================================================================
+   Hero: Editorial Headline, Brand Monitor, Command Console & Fact Strip
+   ========================================================================== */
+
+@layer sections {
+  .hero {
+    position: relative;
+    padding-block: clamp(2.25rem, 1.4rem + 3.6vw, 5rem) clamp(2.5rem, 2rem + 2vw, 4rem);
+    isolation: isolate;
+    overflow: clip;
+
+    /* Oversized wireframe Play triangle echoing the logo geometry */
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: -6%;
+      right: -18%;
+      width: min(78vw, 960px);
+      aspect-ratio: 1;
+      background: linear-gradient(225deg, var(--red-line), var(--line) 55%);
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M22 12 L88 50 L22 88 Z' fill='none' stroke='%23000' stroke-width='0.45' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+      pointer-events: none;
+    }
+
+    /* Ambient crimson studio halo behind the monitor */
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -2;
+      top: 2%;
+      right: 4%;
+      width: min(58vw, 700px);
+      aspect-ratio: 1;
+      background: radial-gradient(closest-side, color-mix(in oklch, var(--red) 24%, transparent), transparent);
+      filter: blur(32px);
+      pointer-events: none;
+    }
+  }
+
+  [data-theme='light'] .hero::after { opacity: 0.42; }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.68fr);
+    grid-template-areas:
+      'copy monitor'
+      'tool tool'
+      'facts facts';
+    gap: 2rem clamp(2rem, 1rem + 3vw, 4rem);
+    align-items: center;
+
+    @media (max-width: 980px) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'copy'
+        'tool'
+        'monitor'
+        'facts';
+    }
+  }
+
+  .hero__copy {
+    grid-area: copy;
+    display: grid;
+    gap: 1.35rem;
+    animation: fade-up var(--dur-3) var(--ease-out) both;
+  }
+
+  .hero__title {
+    font-size: var(--fs-hero);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.052em;
+    max-width: 13.5ch;
+
+    & .serif-accent {
+      font-size: 1.08em;
+      line-height: 0.82;
+      white-space: nowrap;
+    }
+  }
+
+  .hero__lead {
+    max-width: 56ch;
+    font-size: var(--fs-lg);
+    color: var(--ink-2);
+  }
+
+  /* ---------- Brand Broadcast Monitor ---------- */
+  .monitor {
+    grid-area: monitor;
+    position: relative;
+    justify-self: end;
+    width: min(100%, 420px);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raise);
+    box-shadow: var(--shadow-2), 0 0 90px -28px var(--red-glow);
+    overflow: hidden;
+    rotate: 1.25deg;
+    transition: rotate var(--dur-3) var(--ease-out), translate var(--dur-3) var(--ease-out);
+    animation: fade-up var(--dur-3) 120ms var(--ease-out) both;
+
+    &:hover {
+      rotate: 0deg;
+      translate: 0 -2px;
+    }
+
+    @media (max-width: 980px) {
+      justify-self: center;
+      rotate: 0deg;
+      width: min(100%, 380px);
+    }
+  }
+
+  .monitor__bar,
+  .monitor__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    text-transform: uppercase;
+  }
+
+  .monitor__rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  .monitor__screen {
+    position: relative;
+    aspect-ratio: 1 / 0.86;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  .monitor__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 1.03;
+  }
+
+  .monitor__ecg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5%;
+    width: 100%;
+    height: 22%;
+
+    & path {
+      fill: none;
+      stroke: oklch(0.64 0.235 24);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 0.35 1.65;
+      stroke-dashoffset: 1.4;
+      filter: drop-shadow(0 0 6px oklch(0.64 0.235 24));
+      animation: ecg-sweep 2.8s linear infinite;
+    }
+  }
+
+  .monitor__scrub {
+    position: relative;
+    height: 4px;
+    margin: 0.85rem 1rem 0.2rem;
+    border-radius: 4px;
+    background: var(--line-strong);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 57%;
+      border-radius: inherit;
+      background: var(--red);
+    }
+  }
+
+  .monitor__chapter {
+    position: absolute;
+    left: var(--at);
+    top: -3px;
+    width: 2px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--ink-3);
+  }
+
+  .monitor__head {
+    position: absolute;
+    left: 57%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    translate: -50% -50%;
+    background: var(--red);
+    box-shadow: 0 0 0 4px var(--red-wash);
+  }
+
+  .monitor__caption span:last-child {
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+  }
+
+  /* ---------- Command Console Wrapper (#resumir) ---------- */
+  .hero__tool {
+    grid-area: tool;
+    display: grid;
+    gap: 0.95rem;
+    scroll-margin-top: calc(var(--header-h) + 20px);
+  }
+
+  .command {
+    display: grid;
+    gap: 0.9rem;
+    padding: 0.8rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raise);
+    box-shadow: var(--shadow-2);
+    transition: border-color var(--dur-2), box-shadow var(--dur-2);
+    animation: fade-up var(--dur-3) 180ms var(--ease-out) both;
+
+    &:has(.command__input:focus) {
+      border-color: var(--red-line);
+      box-shadow: var(--shadow-2), 0 0 0 5px var(--red-wash);
+    }
+  }
+
+  .command__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-sunken);
+    border: 1px solid var(--line);
+
+    @media (max-width: 660px) {
+      flex-wrap: wrap;
+      padding: 0.6rem;
+    }
+  }
+
+  .command__yt { color: var(--red); flex-shrink: 0; }
+
+  .command__input {
+    flex: 1;
+    min-width: 0;
+    height: 52px;
+    border: 0;
+    background: transparent;
+    font-size: var(--fs-lg);
+    letter-spacing: -0.01em;
+
+    &::placeholder { color: var(--ink-3); }
+    &:focus { outline: none; }
+
+    @media (max-width: 660px) {
+      flex-basis: calc(100% - 40px);
+      height: 44px;
+      font-size: var(--fs-md);
+    }
+  }
+
+  .command__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    & .btn--primary { --btn-h: 48px; padding-inline: 1.35rem; }
+
+    @media (max-width: 660px) {
+      width: 100%;
+      & .btn--primary { flex: 1; }
+    }
+  }
+
+  .command__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-inline: 0.25rem;
+  }
+
+  .command__secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* ---------- Instant URL Preview Strip ---------- */
+  .detected {
+    display: none;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--line-strong);
+    background: var(--bg-sunken);
+    transition: opacity var(--dur-2), translate var(--dur-2), display var(--dur-2) allow-discrete;
+
+    &.visible {
+      display: grid;
+      @starting-style { opacity: 0; translate: 0 -6px; }
+    }
+  }
+
+  .detected__thumb {
+    width: 96px;
+    height: 54px;
+    object-fit: cover;
+    border-radius: var(--radius-xs);
+    background: var(--screen);
+  }
+
+  .detected__title {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .detected__sub {
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .detected__id {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-xs);
+    background: var(--bg-raise-2);
+    color: var(--ink-2);
+
+    @media (max-width: 520px) { display: none; }
+  }
+
+  /* ---------- Advanced Focus & Fallback Drawer ---------- */
+  .advanced {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--dur-3) var(--ease-out);
+
+    &.open { grid-template-rows: 1fr; }
+  }
+
+  .advanced__clip { overflow: hidden; min-height: 0; }
+
+  .advanced__inner {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem 0.25rem 0.4rem;
+    margin-top: 0.1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- 1-Click Samples & Fact Strip ---------- */
+  .samples {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .samples__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 0.35rem;
+  }
+
+  .hero__facts {
+    grid-area: facts;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(0.75rem, 0.5rem + 1.5vw, 2rem);
+    border-top: 1px solid var(--line);
+
+    @media (max-width: 720px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    & li {
+      display: grid;
+      gap: 0.2rem;
+      padding: 1.25rem 1rem 0 1rem;
+      border-right: 1px solid var(--line);
+
+      &:first-child { padding-left: 0; }
+      &:last-child { border-right: 0; }
+
+      @media (max-width: 720px) {
+        &:nth-child(2) { border-right: 0; }
+        &:nth-child(3) { padding-left: 0; }
+      }
+    }
+
+    & strong {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(2.1rem, 1.7rem + 1.5vw, 3.1rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    & span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--ink-2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+}

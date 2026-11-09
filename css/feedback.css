@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Feedback: Error Banner, Live Streaming Telemetry Monitor & Toast
+   ========================================================================== */
+
+@layer app {
+  .app {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .app:has(.visible) { padding-bottom: clamp(2rem, 1rem + 3vw, 4rem); }
+
+  /* Shared enter transition for dynamic panels */
+  .alert,
+  .processing,
+  .workspace,
+  .history {
+    display: none;
+    transition:
+      opacity var(--dur-3) var(--ease-out),
+      translate var(--dur-3) var(--ease-out),
+      display var(--dur-3) allow-discrete;
+
+    &.visible {
+      @starting-style { opacity: 0; translate: 0 14px; }
+    }
+  }
+
+  /* ---------- Error / Contingency Banner ---------- */
+  .alert {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1rem 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--red-line);
+    border-left: 3px solid var(--red);
+    background: var(--red-wash);
+
+    &.visible { display: flex; }
+  }
+
+  .alert__title { display: block; font-size: var(--fs-sm); margin-bottom: 0.2rem; }
+  .alert__text { font-size: var(--fs-sm); color: var(--ink-2); }
+
+  /* ---------- Live Multimodal Processing Monitor ---------- */
+  .processing {
+    gap: 1.25rem;
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line-strong);
+    background: var(--bg-raise);
+    box-shadow: var(--shadow-2);
+
+    &.visible { display: grid; }
+  }
+
+  .processing__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .processing__title {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    min-width: 0;
+    flex: 1 1 320px;
+  }
+
+  .processing__headings {
+    display: grid;
+    gap: 0.22rem;
+    min-width: 0;
+
+    & > span {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .processing__sub {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    line-height: 1.45;
+  }
+
+  .processing__ecg {
+    width: 64px;
+    height: 26px;
+    margin-top: 2px;
+    flex-shrink: 0;
+
+    & path {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 0.4 1.6;
+      animation: ecg-sweep 1.6s linear infinite;
+    }
+  }
+
+  .processing__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .live-heartbeat-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding-inline: 0.65rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-strong);
+    background: var(--bg-sunken);
+    color: var(--ink-2);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    white-space: nowrap;
+
+    &.alive {
+      border-color: color-mix(in oklch, var(--ok) 45%, transparent);
+      background: color-mix(in oklch, var(--ok) 14%, transparent);
+      color: var(--ok);
+    }
+
+    &.warn {
+      border-color: color-mix(in oklch, var(--warn) 45%, transparent);
+      background: color-mix(in oklch, var(--warn) 14%, transparent);
+      color: var(--warn);
+    }
+  }
+
+  .processing__timer {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding-inline: 0.6rem;
+    border-radius: var(--radius-xs);
+    background: var(--red-wash);
+    border: 1px solid var(--red-line);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--red);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+
+    @media (max-width: 720px) { grid-template-columns: 1fr; }
+  }
+
+  .step-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    color: var(--ink-3);
+    font-size: var(--fs-sm);
+    overflow: hidden;
+    transition: color var(--dur-2), border-color var(--dur-2);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 2px;
+      background: var(--red);
+      scale: 0 1;
+      transform-origin: left;
+    }
+
+    &.active {
+      color: var(--ink);
+      border-color: var(--red-line);
+      background: var(--bg-sunken);
+      &::after { animation: step-progress 3s var(--ease-out) forwards; }
+    }
+
+    &.done {
+      color: var(--ink-2);
+      & .step-num { background: var(--red); color: var(--red-ink); }
+    }
+  }
+
+  .step-num {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 22px;
+    border-radius: 5px;
+    background: var(--bg-raise-2);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    flex-shrink: 0;
+    transition: background-color var(--dur-2), color var(--dur-2);
+  }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(1.5rem, env(safe-area-inset-bottom));
+    z-index: 90;
+    max-width: min(92vw, 440px);
+    padding: 0.75rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--ink);
+    color: var(--bg);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    box-shadow: var(--shadow-2);
+    translate: -50% 140%;
+    opacity: 0;
+    pointer-events: none;
+    transition: translate var(--dur-3) var(--ease-out), opacity var(--dur-2);
+
+    &.show { translate: -50% 0; opacity: 1; }
+  }
+}
+
+@keyframes step-progress {
+  to { scale: 0.92 1; }
+}

@@ -1,0 +1,85 @@
+/* ==========================================================================
+   PulseTube AI — Design Tokens
+   Derived from the brand mark: OLED black, paper white, signal red (#ff2638).
+   Uses light-dark() so a single token set serves both themes.
+   ========================================================================== */
+
+@layer tokens {
+  :root {
+    color-scheme: dark;
+
+    /* Brand */
+    --red: light-dark(oklch(0.56 0.225 24), oklch(0.64 0.235 24));        /* ≈ #e0142a / #ff2638 */
+    --red-strong: light-dark(oklch(0.5 0.21 24), oklch(0.7 0.22 24));
+    --red-ink: oklch(0.99 0 0);                                             /* text on red */
+    --red-wash: color-mix(in oklch, var(--red) 12%, transparent);
+    --red-line: color-mix(in oklch, var(--red) 42%, transparent);
+    --red-glow: color-mix(in oklch, oklch(0.64 0.235 24) 55%, transparent);
+
+    /* Surfaces */
+    --bg: light-dark(oklch(0.975 0.003 25), oklch(0.115 0.002 25));        /* #f7f5f5 / #050505-ish */
+    --bg-raise: light-dark(oklch(1 0 0), oklch(0.165 0.003 25));
+    --bg-raise-2: light-dark(oklch(0.955 0.004 25), oklch(0.205 0.004 25));
+    --bg-sunken: light-dark(oklch(0.94 0.004 25), oklch(0.09 0.002 25));
+    --screen: oklch(0.08 0 0);                                              /* video "monitor" is always black */
+
+    /* Ink */
+    --ink: light-dark(oklch(0.17 0.004 25), oklch(0.965 0.002 25));
+    --ink-2: light-dark(oklch(0.4 0.006 25), oklch(0.74 0.005 25));
+    --ink-3: light-dark(oklch(0.56 0.006 25), oklch(0.56 0.005 25));
+
+    /* Lines */
+    --line: light-dark(oklch(0.17 0.004 25 / 0.1), oklch(1 0 0 / 0.08));
+    --line-strong: light-dark(oklch(0.17 0.004 25 / 0.2), oklch(1 0 0 / 0.16));
+
+    /* Status */
+    --ok: light-dark(oklch(0.55 0.14 155), oklch(0.75 0.16 155));
+    --warn: light-dark(oklch(0.62 0.14 70), oklch(0.8 0.14 80));
+
+    /* Logo mark colors (consumed by the inline SVG sprite) */
+    --mark-light: var(--ink);
+    --mark-red: oklch(0.64 0.235 24);
+
+    /* Typography */
+    --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+    --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-md: 1rem;
+    --fs-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    --fs-xl: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+    --fs-2xl: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+    --fs-hero: clamp(2.75rem, 1.2rem + 5.6vw, 6.25rem);
+
+    /* Space & shape */
+    --container: 1240px;
+    --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
+    --section-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+    --radius-xs: 6px;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --radius-pill: 999px;
+
+    /* Elevation */
+    --shadow-1: 0 1px 0 oklch(1 0 0 / 0.04) inset, 0 1px 2px oklch(0 0 0 / 0.2);
+    --shadow-2: 0 1px 0 oklch(1 0 0 / 0.05) inset, 0 24px 48px -24px oklch(0 0 0 / 0.55);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-1: 160ms;
+    --dur-2: 280ms;
+    --dur-3: 520ms;
+
+    --header-h: 68px;
+  }
+
+  [data-theme='light'] {
+    color-scheme: light;
+    --shadow-1: 0 1px 2px oklch(0.2 0.01 25 / 0.06);
+    --shadow-2: 0 24px 48px -28px oklch(0.2 0.01 25 / 0.28);
+  }
+}

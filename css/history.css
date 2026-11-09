@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Local History Library ("Biblioteca recente")
+   ========================================================================== */
+
+@layer app {
+  .history {
+    margin-top: 1rem;
+
+    &.visible { display: block; }
+  }
+
+  .history__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .history__title {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+
+    & small {
+      margin-left: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 400;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .history__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 0.9rem;
+  }
+
+  .history-card {
+    display: grid;
+    text-align: left;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    background: var(--bg-raise);
+    overflow: hidden;
+    transition: border-color var(--dur-2), translate var(--dur-2) var(--ease-out);
+
+    &:hover { border-color: var(--red-line); translate: 0 -3px; }
+    &:hover .history-thumb { scale: 1.04; }
+  }
+
+  .history-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--screen);
+    transition: scale var(--dur-3) var(--ease-out);
+  }
+
+  .history-meta {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.8rem 0.9rem 0.95rem;
+  }
+
+  .history-title {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .history-date {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--ink-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

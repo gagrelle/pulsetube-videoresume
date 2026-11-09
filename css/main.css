@@ -1,0 +1,20 @@
+/* ==========================================================================
+   PulseTube AI — Main Stylesheet Entry Point
+   Cascade layers give a predictable order regardless of selector specificity.
+   In production, Vite + Lightning CSS inline these imports into one file.
+   ========================================================================== */
+
+@layer reset, tokens, base, components, layout, sections, app, utilities;
+
+@import url('./tokens.css');
+@import url('./base.css');
+@import url('./components.css');
+@import url('./header.css');
+@import url('./hero.css');
+@import url('./feedback.css');
+@import url('./workspace.css');
+@import url('./mindmap.css');
+@import url('./qa.css');
+@import url('./history.css');
+@import url('./landing.css');
+@import url('./responsive.css');

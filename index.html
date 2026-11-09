@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Primary SEO -->
+  <title>PulseTube AI — Resuma vídeos e aulas do YouTube com IA</title>
+  <meta
+    name="description"
+    content="Cole um link do YouTube e gere em segundos resumo teórico, capítulos com timestamps clicáveis, mapa mental interativo e tutor Q&A via IA multimodal Gemini."
+  />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="PulseTube AI" />
+  <meta name="application-name" content="PulseTube AI" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://pulsetube.ai/" />
+
+  <!-- Theme & Icons -->
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#050505" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f7f5f5" media="(prefers-color-scheme: light)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="PulseTube AI" />
+  <meta property="og:url" content="https://pulsetube.ai/" />
+  <meta property="og:title" content="PulseTube AI — Resuma vídeos e aulas do YouTube com IA" />
+  <meta
+    property="og:description"
+    content="Resumo estruturado, capítulos com timestamps clicáveis, mapa mental interativo e perguntas ao vídeo. Assista menos, aprenda mais."
+  />
+  <meta property="og:image" content="https://pulsetube.ai/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Identidade visual do PulseTube AI: símbolo de play vermelho e branco com capelo acadêmico e pulso ECG em fundo preto" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PulseTube AI — Resuma vídeos e aulas do YouTube com IA" />
+  <meta
+    name="twitter:description"
+    content="Resumo estruturado, capítulos com timestamps clicáveis, mapa mental interativo e perguntas ao vídeo em segundos."
+  />
+  <meta name="twitter:image" content="https://pulsetube.ai/og-image.jpg" />
+
+  <!-- Performance: Typography & Hero Artwork -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
+  />
+  <link rel="preload" as="image" href="/assets/brand/logo-hero.jpg" fetchpriority="high" />
+
+  <!-- Modular CSS Entrypoint (bundled & transpiled by Vite + Lightning CSS) -->
+  <link rel="stylesheet" href="./css/main.css" />
+
+  <!-- Prevent theme FOUC before ES module boot (defaults to Logo's OLED Dark) -->
+  <script>
+    try {
+      var savedTheme = localStorage.getItem('pulsetube_theme_v1');
+      document.documentElement.setAttribute(
+        'data-theme',
+        savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark'
+      );
+    } catch (e) {}
+  </script>
+
+  <!-- Structured Data (Schema.org @graph) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://pulsetube.ai/#org",
+          "name": "PulseTube AI",
+          "url": "https://pulsetube.ai/",
+          "logo": "https://pulsetube.ai/icon-512.png"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://pulsetube.ai/#website",
+          "url": "https://pulsetube.ai/",
+          "name": "PulseTube AI",
+          "inLanguage": "pt-BR",
+          "publisher": { "@id": "https://pulsetube.ai/#org" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://pulsetube.ai/#app",
+          "name": "PulseTube AI",
+          "url": "https://pulsetube.ai/",
+          "description": "Plataforma web para resumo multimodal de vídeos e videoaulas do YouTube com capítulos e timestamps clicáveis, glossário de conceitos, mapa mental interativo e tutor Q&A via Google Gemini.",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Web",
+          "browserRequirements": "Requer JavaScript e um navegador moderno.",
+          "inLanguage": ["pt-BR", "en", "es"],
+          "image": "https://pulsetube.ai/og-image.jpg",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+          "featureList": [
+            "Resumo executivo e apostila teórica de vídeos do YouTube",
+            "Capítulos com timestamps clicáveis sincronizados ao player",
+            "Glossário automático de conceitos, fórmulas e termos técnicos",
+            "Mapa mental interativo com Active Recall e exportação PNG/SVG",
+            "Tutor Q&A econômico em tokens com inspeção cirúrgica de trechos",
+            "Exportação limpa em Markdown (.md) e histórico salvo no navegador"
+          ],
+          "publisher": { "@id": "https://pulsetube.ai/#org" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://pulsetube.ai/#faq-schema",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Como resumir um vídeo do YouTube com o PulseTube AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cole o link público do vídeo no campo principal, escolha o modo de resumo desejado e clique em Resumir vídeo. Em segundos você recebe a visão geral, glossário, módulos-chave, capítulos com timestamps clicáveis e um mapa mental interativo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O PulseTube AI funciona com vídeos privados ou não listados?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A leitura multimodal direta funciona com vídeos públicos. Para vídeos privados, restritos ou não listados, abra o painel Foco & Plano B, cole a transcrição do vídeo e gere a mesma síntese completa."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como funciona o Mapa Mental interativo?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Todo resumo gera automaticamente um mapa mental vetorial sem consumir tokens extras. Você pode navegar com zoom, recolher ramos para revisão ativa (Active Recall), editar ou criar nós, expandir tópicos com IA e baixar em PNG de alta resolução ou SVG."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Preciso de uma chave da API do Google Gemini?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim. O PulseTube AI conecta-se diretamente ao endpoint oficial do Google Gemini a partir do seu navegador. Sua chave fica armazenada apenas em localStorage no seu próprio dispositivo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Em quais idiomas posso gerar os resumos?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Você pode gerar a síntese em Português do Brasil, Inglês ou Espanhol, mesmo quando o áudio original do vídeo está em outro idioma."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Posso exportar o resumo e o mapa mental para minhas notas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim. Copie o resumo estruturado em Markdown com um clique, baixe o arquivo .md pronto para Notion ou Obsidian, e exporte o mapa mental em SVG vetorial ou PNG Retina."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- Inline SVG Sprite: Vector Brand Emblem (Cap + Play + ECG Pulse) & Shared Icons -->
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="pt-mark-gradient" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" class="mark-stop-light" />
+        <stop offset=".36" class="mark-stop-light" />
+        <stop offset=".64" class="mark-stop-red" />
+        <stop offset="1" class="mark-stop-red" />
+      </linearGradient>
+      <symbol id="pt-mark" viewBox="5 7 54 56">
+        <path d="M23 26 L52 42 L23 58 Z" fill="none" stroke="url(#pt-mark-gradient)" stroke-width="6.5" stroke-linejoin="round" />
+        <polyline points="27,42 32,42 34.5,37 37.5,47 40.5,39.5 42.5,42 46,42" fill="none" stroke="var(--mark-light)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        <polygon points="8,17 27,10 44,15 25,22" fill="var(--mark-light)" />
+        <line x1="12" y1="18.5" x2="12" y2="28" stroke="var(--mark-light)" stroke-width="1.6" />
+        <rect x="10.4" y="27" width="3.2" height="6" rx="1.2" fill="var(--mark-light)" />
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="i-pulse" viewBox="0 0 24 24">
+        <path d="M2 12h5l2-5 3 10 3-7 2 2h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ===================================================================
+       Site Header + Scroll Scrubber + API Vault Drawer
+       =================================================================== -->
+  <header class="site-header">
+    <div class="scroll-scrubber" aria-hidden="true"></div>
+
+    <div class="site-header__inner container">
+      <a href="#inicio" id="brand-home-link" class="brand" aria-label="PulseTube AI — início">
+        <svg class="brand__mark" width="34" height="34" aria-hidden="true"><use href="#pt-mark" /></svg>
+        <span class="brand__text">
+          <span class="brand__name">PulseTube<span class="brand__ai">AI</span></span>
+          <span class="brand__sub">Vídeo · Pulso · Estudo</span>
+        </span>
+      </a>
+
+      <nav id="site-nav" class="site-nav" popover aria-label="Navegação principal">
+        <ul class="site-nav__list">
+          <li><a href="#como-funciona" class="site-nav__link">Como funciona</a></li>
+          <li><a href="#recursos" class="site-nav__link">Recursos</a></li>
+          <li><a href="#modos" class="site-nav__link">Modos</a></li>
+          <li><a href="#para-quem" class="site-nav__link">Para quem</a></li>
+          <li><a href="#faq" class="site-nav__link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <button
+          type="button"
+          id="toggle-api-drawer-btn"
+          class="status-pill"
+          aria-expanded="false"
+          aria-controls="api-drawer"
+          title="Configurar modelo e chave da API Gemini"
+        >
+          <span id="api-status-dot" class="status-dot"></span>
+          <span id="api-status-label" class="status-pill__label">Verificando API...</span>
+        </button>
+
+        <button
+          type="button"
+          id="theme-toggle-btn"
+          class="icon-btn"
+          title="Alternar tema OLED escuro / papel claro"
+          aria-label="Alternar tema visual"
+        >
+          <svg id="theme-icon-sun" class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+          </svg>
+        </button>
+
+        <button type="button" class="icon-btn nav-toggle" popovertarget="site-nav" aria-label="Abrir menu de navegação">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h10"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Gemini API Vault -->
+    <div id="api-drawer" class="api-drawer" role="region" aria-label="Configurações da API Google Gemini">
+      <div class="api-drawer__clip">
+        <div class="api-drawer__inner container">
+          <div class="api-drawer__info">
+            <p class="api-drawer__title">Motor &amp; Credencial Google Gemini (BYOK)</p>
+            <p class="api-drawer__text">
+              Sua chave fica salva exclusivamente neste navegador e conecta direto ao endpoint oficial do Google.
+              <a
+                href="https://aistudio.google.com/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="api-drawer__link"
+              >Gerar chave gratuita no Google AI Studio ↗</a>
+            </p>
+          </div>
+
+          <div class="api-drawer__fields">
+            <label class="field">
+              <span class="field__label">Modelo Gemini</span>
+              <span class="select-wrap">
+                <select id="model-selector" class="select" aria-label="Selecionar modelo Gemini">
+                  <option value="gemini-3.6-flash" selected>gemini-3.6-flash</option>
+                  <option value="gemini-3.5-flash">gemini-3.5-flash</option>
+                  <option value="gemini-3.8-flash">gemini-3.8-flash</option>
+                  <option value="gemini-3-flash-preview">gemini-3-flash-preview</option>
+                </select>
+              </span>
+            </label>
+
+            <button
+              type="button"
+              id="test-model-btn"
+              class="btn btn--ghost"
+              title="Testar disponibilidade, cota e latência em tempo real do modelo selecionado"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+              <span id="test-model-btn-label">Testar modelo</span>
+            </button>
+
+            <label class="field field--grow">
+              <span class="field__label">Chave da API</span>
+              <span class="key-input">
+                <input
+                  type="password"
+                  id="api-key-input"
+                  class="input input--mono"
+                  placeholder="AIzaSy..."
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button type="button" id="peek-api-key-btn" class="key-input__peek" title="Mostrar ou ocultar chave" aria-label="Mostrar ou ocultar chave">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </span>
+            </label>
+
+            <button type="button" id="save-api-key-btn" class="btn btn--outline">Validar e salvar</button>
+            <button
+              type="button"
+              id="clear-api-key-btn"
+              class="btn btn--ghost"
+              style="display: none;"
+              title="Apagar chave salva deste navegador"
+            >Remover</button>
+          </div>
+
+          <!-- Real-Time Model Health Diagnostic Strip -->
+          <div id="model-health-strip" class="model-health" data-state="idle" role="status" aria-live="polite">
+            <div class="model-health__head">
+              <span id="model-health-dot" class="status-dot"></span>
+              <strong id="model-health-badge" class="model-health__badge">Pronto para testar</strong>
+              <code id="model-health-name" class="model-health__model">gemini-3.6-flash</code>
+              <span id="model-health-metrics" class="model-health__metrics"></span>
+            </div>
+            <p id="model-health-detail" class="model-health__detail">
+              Selecione um modelo ou clique em &ldquo;Testar modelo&rdquo; para verificar resposta SSE, latência e fila em tempo real.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- =================================================================
+         Hero + Interactive Command Stage
+         ================================================================= -->
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">
+            <span class="rec-dot" aria-hidden="true"></span>
+            Síntese multimodal · Áudio, slides &amp; linha do tempo
+          </p>
+
+          <h1 id="hero-title" class="hero__title">
+            Extraia o <em class="serif-accent">pulso</em> de qualquer aula ou vídeo.
+          </h1>
+
+          <p class="hero__lead">
+            Cole um link do YouTube e transforme horas de vídeo em <strong>apostila estruturada</strong>,
+            capítulos com <strong>timestamps clicáveis</strong>, mapa mental interativo e tutor Q&amp;A em minutos.
+          </p>
+        </div>
+
+        <!-- Brand Monitor Frame (showcasing the official logo + live ECG sweep) -->
+        <figure class="monitor" aria-hidden="true">
+          <div class="monitor__bar">
+            <span class="monitor__rec"><span class="rec-dot"></span>SINAL MULTIMODAL</span>
+            <span class="monitor__tc">00:14:32:08</span>
+          </div>
+          <div class="monitor__screen">
+            <img
+              class="monitor__logo"
+              src="/assets/brand/logo-hero.jpg"
+              alt=""
+              width="720"
+              height="720"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <svg class="monitor__ecg" viewBox="0 0 400 60" preserveAspectRatio="none">
+              <path pathLength="1" d="M0 30 H140 L152 30 L160 12 L172 50 L184 20 L192 30 H260 L268 30 L274 22 L282 38 L288 30 H400" />
+            </svg>
+          </div>
+          <div class="monitor__scrub">
+            <span class="monitor__chapter" style="--at: 8%"></span>
+            <span class="monitor__chapter" style="--at: 31%"></span>
+            <span class="monitor__chapter" style="--at: 57%"></span>
+            <span class="monitor__chapter" style="--at: 83%"></span>
+            <span class="monitor__head"></span>
+          </div>
+          <figcaption class="monitor__caption">
+            <span>CAP. 03 · 27:03</span>
+            <span>Resumo, glossário &amp; mapa mental</span>
+          </figcaption>
+        </figure>
+
+        <!-- Product Command Console (#resumir target for landing CTAs) -->
+        <div id="resumir" class="hero__tool">
+          <form id="summarize-form" class="command" novalidate aria-label="Resumir vídeo do YouTube">
+            <div class="command__bar">
+              <label for="youtube-url-input" class="visually-hidden">Link do vídeo do YouTube</label>
+              <span class="command__yt" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </span>
+
+              <input
+                type="url"
+                id="youtube-url-input"
+                class="command__input"
+                placeholder="Cole o link do YouTube — watch?v=, youtu.be/, live/ ou shorts/"
+                autocomplete="off"
+                inputmode="url"
+                required
+              />
+
+              <div class="command__actions">
+                <button type="button" id="paste-url-btn" class="btn btn--ghost btn--sm" title="Colar da área de transferência">Colar</button>
+                <button type="button" id="clear-url-btn" class="btn btn--ghost btn--sm" style="display: none;" title="Limpar campo">Limpar</button>
+                <button type="submit" id="analyze-submit-btn" class="btn btn--primary">
+                  <span>Resumir vídeo</span>
+                  <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Instant oEmbed URL Preview -->
+            <div id="detected-video-strip" class="detected" aria-live="polite">
+              <img id="detected-thumb" class="detected__thumb" src="data:," alt="Miniatura do vídeo detectado" width="96" height="54" />
+              <div class="detected__meta">
+                <p id="detected-title" class="detected__title">Vídeo do YouTube detectado</p>
+                <p class="detected__sub"><span id="detected-channel">Pronto para leitura multimodal</span></p>
+              </div>
+              <span id="detected-video-id" class="detected__id">ID</span>
+            </div>
+
+            <!-- Mode Selector + Language + Fallback Trigger -->
+            <div class="command__options">
+              <div class="mode-pills" role="group" aria-label="Formato do resumo">
+                <button type="button" id="mode-exec" class="mode-pill active" data-mode="executive" aria-pressed="true">Executivo</button>
+                <button type="button" id="mode-study" class="mode-pill" data-mode="deep_study" aria-pressed="false">Aula &amp; estudo</button>
+                <button type="button" id="mode-action" class="mode-pill" data-mode="actionable" aria-pressed="false">Insights práticos</button>
+                <button type="button" id="mode-timeline" class="mode-pill" data-mode="chronological" aria-pressed="false">Roteiro temporal</button>
+              </div>
+
+              <div class="command__secondary">
+                <span class="select-wrap select-wrap--mini">
+                  <select id="output-lang-select" class="select select--mini" aria-label="Idioma do resumo">
+                    <option value="Português do Brasil" selected>PT-BR</option>
+                    <option value="English">EN</option>
+                    <option value="Español">ES</option>
+                  </select>
+                </span>
+
+                <button type="button" id="toggle-advanced-btn" class="link-btn" aria-expanded="false" aria-controls="advanced-drawer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path>
+                    <circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle>
+                  </svg>
+                  <span>Foco &amp; Plano B</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Expandable Custom Focus & Manual Transcript Fallback -->
+            <div id="advanced-drawer" class="advanced">
+              <div class="advanced__clip">
+                <div class="advanced__inner">
+                  <div class="field">
+                    <label for="custom-focus-input" class="field__label">
+                      Instrução ou foco específico <span class="field__hint">opcional — ex.: "liste fórmulas, bibliotecas e explique os diagramas"</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="custom-focus-input"
+                      class="input"
+                      placeholder="Direcione o olhar da IA para algum ponto específico da aula ou vídeo..."
+                    />
+                  </div>
+
+                  <div class="field">
+                    <label for="manual-transcript-input" class="field__label">
+                      Plano B — transcrição manual <span class="field__hint">para vídeos privados ou não listados; deixe vazio para leitura direta pelo link</span>
+                    </label>
+                    <textarea
+                      id="manual-transcript-input"
+                      class="input textarea"
+                      placeholder="No YouTube, abra 'Mostrar transcrição', copie o texto e cole aqui..."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- 1-Click Demo Videos (.samples-row required by dom.js) -->
+          <div class="samples samples-row" role="group" aria-label="Exemplos rápidos para testar com um clique">
+            <span class="samples__label">Testar em 1 clique</span>
+            <button type="button" id="sample-btn-1" class="sample-chip" data-url="https://www.youtube.com/watch?v=sal78ACtGTc">
+              <span class="sample-chip__tc">59:48</span>
+              <span>Andrej Karpathy · Intro to LLMs</span>
+            </button>
+            <button type="button" id="sample-btn-2" class="sample-chip" data-url="https://www.youtube.com/watch?v=U9mJuUkhUzk">
+              <span class="sample-chip__tc">DEMO</span>
+              <span>OpenAI · Multimodal AI</span>
+            </button>
+            <button type="button" id="sample-btn-3" class="sample-chip" data-url="https://www.youtube.com/watch?v=aircAruvnKk">
+              <span class="sample-chip__tc">18:40</span>
+              <span>3Blue1Brown · Redes neurais</span>
+            </button>
+          </div>
+        </div>
+
+        <ul class="hero__facts" aria-label="Indicadores da plataforma">
+          <li><strong>4</strong><span>modos de estudo</span></li>
+          <li><strong>Mapa</strong><span>mental SVG/PNG</span></li>
+          <li><strong>~98%</strong><span>economia de tokens Q&amp;A</span></li>
+          <li><strong>.md</strong><span>exportação limpa</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         Live Application Stage: Alerts, Streaming Telemetry, Workspace & History
+         ================================================================= -->
+    <section id="app" class="app container" aria-label="Área de resultado e estudo">
+      <!-- Error / Contingency Alert -->
+      <div id="error-banner" class="alert" role="alert">
+        <div class="alert__body">
+          <strong id="error-title" class="alert__title">Não foi possível concluir a leitura</strong>
+          <p id="error-message" class="alert__text"></p>
+        </div>
+        <button type="button" id="close-error-btn" class="btn btn--ghost btn--sm">Fechar</button>
+      </div>
+
+      <!-- Real-Time Streaming Multimodal Processing Monitor -->
+      <div id="processing-card" class="processing" aria-live="polite">
+        <div class="processing__top">
+          <div class="processing__title">
+            <svg class="processing__ecg" viewBox="0 0 120 32" aria-hidden="true">
+              <path pathLength="1" d="M0 16 H40 L46 16 L50 6 L56 26 L62 10 L66 16 H120" />
+            </svg>
+            <div class="processing__headings">
+              <span id="processing-headline">Iniciando leitura multimodal do vídeo no Gemini...</span>
+              <p id="processing-substatus" class="processing__sub">Conectando ao endpoint oficial de streaming do Gemini...</p>
+            </div>
+          </div>
+
+          <div class="processing__meta">
+            <span id="processing-live-pill" class="live-heartbeat-pill">Aguardando 1º sinal...</span>
+            <span id="elapsed-timer" class="processing__timer">00.0s</span>
+            <button type="button" id="cancel-analyze-btn" class="btn btn--ghost btn--sm">Cancelar</button>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li id="step-1" class="step-item active"><span class="step-num">01</span><span>Indexando URL, áudio &amp; quadros</span></li>
+          <li id="step-2" class="step-item"><span class="step-num">02</span><span>Estruturando conceitos &amp; fórmulas</span></li>
+          <li id="step-3" class="step-item"><span class="step-num">03</span><span>Transmitindo síntese &amp; timestamps</span></li>
+        </ol>
+      </div>
+
+      <!-- Split Workspace: Sticky Synchronized Player + Multi-Tab Study Output -->
+      <div id="workspace-grid" class="workspace">
+        <aside class="media" aria-label="Player e telemetria do vídeo">
+          <div class="media__card">
+            <div class="media__player">
+              <iframe
+                id="youtube-iframe-player"
+                title="Player do YouTube sincronizado com os capítulos"
+                src="about:blank"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="media__body">
+              <div class="media__row">
+                <span id="result-category-tag" class="tag">Estudo &amp; Teoria</span>
+                <a id="result-external-link" class="media__external" href="#" target="_blank" rel="noopener noreferrer">
+                  Abrir no YouTube
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <path d="M7 17 17 7M8 7h9v9"></path>
+                  </svg>
+                </a>
+              </div>
+
+              <h2 id="result-video-title" class="media__title">—</h2>
+              <p id="result-video-channel" class="media__channel">—</p>
+
+              <div class="saved">
+                <div class="saved__head">
+                  <span>Economia de tempo</span>
+                  <span id="time-saved-percent" class="saved__badge">~85% ganho</span>
+                </div>
+                <div class="saved__track"><div id="time-saved-bar" class="saved__fill"></div></div>
+                <div class="saved__metrics">
+                  <span id="video-duration-label">Vídeo: ~15 min</span>
+                  <span id="reading-duration-label">Estudo: ~3 min</span>
+                </div>
+              </div>
+            </div>
+
+            <dl class="telemetry">
+              <div class="telemetry__cell"><dt>Modelo</dt><dd id="telemetry-model">—</dd></div>
+              <div class="telemetry__cell"><dt>Latência</dt><dd id="telemetry-latency">—</dd></div>
+              <div class="telemetry__cell"><dt>Tokens</dt><dd id="telemetry-tokens">—</dd></div>
+            </dl>
+          </div>
+        </aside>
+
+        <article class="output" aria-label="Dossiê de estudo do vídeo">
+          <div class="output__toolbar">
+            <div class="tabs" role="tablist" aria-label="Modos de visualização do resultado">
+              <button type="button" id="tab-summary-btn" class="tab active" role="tab" aria-selected="true" aria-controls="summary-pane">
+                Resumo teórico
+              </button>
+              <button type="button" id="tab-mindmap-btn" class="tab" role="tab" aria-selected="false" aria-controls="mindmap-pane">
+                Mapa mental
+              </button>
+              <button type="button" id="tab-qa-btn" class="tab" role="tab" aria-selected="false" aria-controls="qa-pane">
+                Perguntar ao vídeo
+              </button>
+            </div>
+
+            <div class="output__export">
+              <button type="button" id="copy-markdown-btn" class="btn btn--ghost btn--sm">Copiar Markdown</button>
+              <button type="button" id="download-markdown-btn" class="btn btn--ghost btn--sm">Baixar .md</button>
+            </div>
+          </div>
+
+          <!-- Tab 1: Structured Summary + Glossary + Chapters -->
+          <div id="summary-pane" class="summary-pane" role="tabpanel" aria-labelledby="tab-summary-btn">
+            <section class="summary-block" aria-labelledby="sum-h-overview">
+              <h3 id="sum-h-overview" class="summary-heading"><span class="summary-heading__tc">TL;DR</span>Fundamentação &amp; visão geral</h3>
+              <div id="summary-tldr" class="tldr"></div>
+              <p id="summary-audience" class="audience"></p>
+            </section>
+
+            <section id="summary-glossary-block" class="summary-block" aria-labelledby="sum-h-glossary" style="display: none;">
+              <h3 id="sum-h-glossary" class="summary-heading"><span class="summary-heading__tc">DEF</span>Glossário de conceitos &amp; fórmulas</h3>
+              <div id="summary-glossary" class="glossary-grid"></div>
+            </section>
+
+            <section class="summary-block" aria-labelledby="sum-h-keys">
+              <h3 id="sum-h-keys" class="summary-heading"><span class="summary-heading__tc">KEY</span>Módulos &amp; pontos-chave</h3>
+              <div id="summary-keypoints" class="keypoints"></div>
+            </section>
+
+            <section class="summary-block" aria-labelledby="sum-h-timeline">
+              <h3 id="sum-h-timeline" class="summary-heading">
+                <span class="summary-heading__tc">CAP</span>Capítulos cronológicos
+                <small>clique no timecode para saltar no player</small>
+              </h3>
+              <div id="summary-timeline" class="timeline"></div>
+            </section>
+
+            <section class="summary-block" aria-labelledby="sum-h-takeaways">
+              <h3 id="sum-h-takeaways" class="summary-heading"><span class="summary-heading__tc">END</span>Aplicação prática &amp; revisão</h3>
+              <ul id="summary-takeaways" class="takeaways"></ul>
+              <div id="summary-conclusion" class="conclusion"></div>
+            </section>
+          </div>
+
+          <!-- Tab 2: Interactive Vector Mind Map & Active-Recall Builder -->
+          <div id="mindmap-pane" class="mindmap-pane hidden" role="tabpanel" aria-labelledby="tab-mindmap-btn">
+            <div class="mm-toolbar">
+              <div class="mm-toolbar-group" role="group" aria-label="Zoom e navegação do mapa mental">
+                <button type="button" id="mm-zoom-out-btn" class="mm-tool-btn" title="Reduzir zoom">−</button>
+                <span id="mm-zoom-label" class="mm-zoom-label">100%</span>
+                <button type="button" id="mm-zoom-in-btn" class="mm-tool-btn" title="Aumentar zoom">+</button>
+                <button type="button" id="mm-fit-btn" class="mm-tool-btn">Ajustar à tela</button>
+                <button type="button" id="mm-collapse-all-btn" class="mm-tool-btn">Recolher ramos</button>
+                <button type="button" id="mm-reset-btn" class="mm-tool-btn" title="Restaurar mapa original">Restaurar</button>
+              </div>
+
+              <div class="mm-toolbar-group" role="group" aria-label="Exportar mapa mental">
+                <button type="button" id="mm-export-svg-btn" class="mm-tool-btn">Baixar SVG</button>
+                <button type="button" id="mm-export-png-btn" class="mm-tool-btn accent">Baixar PNG HD</button>
+              </div>
+            </div>
+
+            <div id="mm-canvas-wrap" class="mm-canvas-wrap">
+              <svg id="mm-svg" class="mm-svg" aria-label="Mapa mental interativo do vídeo">
+                <g id="mm-transform-group"></g>
+              </svg>
+              <span class="mm-canvas-hint">Arraste para mover · Scroll para zoom · Clique em ▶ MM:SS para saltar no vídeo</span>
+            </div>
+
+            <form id="mm-inspector" class="mm-inspector">
+              <div class="mm-inspector-top">
+                <span class="mm-inspector-title">Inspetor &amp; Construtor de Nós</span>
+                <div class="mm-inspector-actions">
+                  <button type="button" id="mm-seek-node-btn" class="mm-tool-btn" disabled>▶ Ir ao minuto</button>
+                  <button type="button" id="mm-add-child-btn" class="mm-tool-btn">+ Sub-nó</button>
+                  <button type="button" id="mm-ai-expand-btn" class="mm-tool-btn accent">✦ Expandir c/ IA</button>
+                  <button type="button" id="mm-delete-node-btn" class="mm-tool-btn danger" disabled>Excluir nó</button>
+                </div>
+              </div>
+
+              <div class="mm-inspector-fields">
+                <label class="mm-field-label">
+                  <span>Título do conceito</span>
+                  <input type="text" id="mm-edit-label" class="mm-input" placeholder="Nome do conceito..." />
+                </label>
+                <label class="mm-field-label">
+                  <span>Timecode</span>
+                  <input type="text" id="mm-edit-ts" class="mm-input mono" placeholder="MM:SS" />
+                </label>
+              </div>
+
+              <label class="mm-field-label">
+                <span>Nota de estudo / fórmula / explicação</span>
+                <textarea id="mm-edit-note" class="mm-textarea" placeholder="Adicione detalhes, fórmulas ou observações para este ramo..."></textarea>
+              </label>
+            </form>
+          </div>
+
+          <!-- Tab 3: Token-Smart Q&A Chat with the Video -->
+          <div id="qa-pane" class="qa-pane hidden" role="tabpanel" aria-labelledby="tab-qa-btn">
+            <div class="qa-top-row">
+              <div id="qa-suggestions" class="qa-suggestions">
+                <button type="button" id="qa-chip-1" class="sample-chip" data-question="Quais ferramentas, bibliotecas ou referências são mencionadas neste vídeo?">Ferramentas e referências</button>
+                <button type="button" id="qa-chip-2" class="sample-chip" data-question="Explique o que foi mostrado visualmente nos slides ou quadro mais importantes.">O que apareceu nos slides?</button>
+                <button type="button" id="qa-chip-3" class="sample-chip" data-question="Crie 5 perguntas de revisão ativa com gabarito comentado sobre esta aula.">Gerar quiz de revisão</button>
+              </div>
+
+              <label class="qa-video-toggle" title="Quando ativado, reenvia o fluxo completo do vídeo ao Gemini em vez de usar o dossiê econômico">
+                <input type="checkbox" id="qa-force-video-toggle" />
+                <span>Reinspecionar vídeo completo</span>
+              </label>
+            </div>
+
+            <div id="qa-messages" class="qa-messages" aria-live="polite">
+              <div class="qa-msg assistant">
+                Vídeo carregado no contexto multimodal. Pergunte sobre conceitos, demonstrações visuais ou cite um minuto (ex.: <code>12:30</code>) para inspecionar o trecho exato.
+              </div>
+            </div>
+
+            <form id="qa-form" class="qa-form">
+              <label for="qa-question-input" class="visually-hidden">Sua pergunta sobre o vídeo</label>
+              <input
+                type="text"
+                id="qa-question-input"
+                class="input"
+                placeholder="Pergunte sobre qualquer conceito, fórmula ou minuto do vídeo..."
+                autocomplete="off"
+                required
+              />
+              <button type="submit" id="qa-submit-btn" class="btn btn--primary">Perguntar</button>
+            </form>
+          </div>
+        </article>
+      </div>
+
+      <!-- Saved Local Library -->
+      <section id="history-section" class="history" aria-labelledby="history-title">
+        <div class="history__head">
+          <h2 id="history-title" class="history__title">Biblioteca recente <small>salva neste navegador</small></h2>
+          <button type="button" id="clear-history-btn" class="btn btn--ghost btn--sm">Limpar histórico</button>
+        </div>
+        <div id="history-grid" class="history__grid"></div>
+      </section>
+    </section>
+
+    <!-- =================================================================
+         00:01 — Como funciona
+         ================================================================= -->
+    <section id="como-funciona" class="section" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__tc">00:01 <span>Como funciona</span></p>
+          <h2 id="how-title" class="section-head__title">Do play ao domínio teórico em <em class="serif-accent">três cortes</em>.</h2>
+          <p class="section-head__lead">Sem instalar extensão, sem baixar arquivos pesados e sem criar conta. O PulseTube une leitura audiovisual e síntese acadêmica direto no navegador.</p>
+        </header>
+
+        <ol class="chapters reveal">
+          <li class="chapter">
+            <span class="chapter__tc">00:00 · ENTRADA</span>
+            <h3 class="chapter__title">Cole qualquer URL do YouTube</h3>
+            <p class="chapter__text">Aulas universitárias, palestras técnicas, podcasts longos ou Shorts. O preview identifica título, canal e miniatura instantaneamente.</p>
+          </li>
+          <li class="chapter">
+            <span class="chapter__tc">00:05 · PULSO MULTIMODAL</span>
+            <h3 class="chapter__title">A IA ouve a fala e lê os slides</h3>
+            <p class="chapter__text">O Gemini processa áudio, argumentação, códigos, fórmulas e diagramas mostrados no quadro em streaming de tempo real.</p>
+          </li>
+          <li class="chapter">
+            <span class="chapter__tc">00:30 · ESTUDO ATIVO</span>
+            <h3 class="chapter__title">Salte nos minutos, mapeie e revise</h3>
+            <p class="chapter__text">Navegue por capítulos sincronizados ao player, explore o mapa mental interativo e tire dúvidas com economia de até 98% de tokens.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="pulse-rule" aria-hidden="true"></div>
+
+    <!-- =================================================================
+         00:02 — Recursos (Bento Grid)
+         ================================================================= -->
+    <section id="recursos" class="section" aria-labelledby="features-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__tc">00:02 <span>Recursos</span></p>
+          <h2 id="features-title" class="section-head__title">Mais que um resumo: uma <em class="serif-accent">bancada de estudo</em> completa.</h2>
+        </header>
+
+        <ul class="bento">
+          <li class="bento__card bento__card--wide reveal">
+            <div class="bento__demo" aria-hidden="true">
+              <span class="tc-chip">▶ 02:14</span>
+              <span class="tc-chip">▶ 11:52</span>
+              <span class="tc-chip tc-chip--live">▶ 27:03</span>
+              <span class="tc-chip">▶ 41:20</span>
+            </div>
+            <h3 class="bento__title">Timestamps sincronizados sem recarregar</h3>
+            <p class="bento__text">Cada módulo, citação e ramo do mapa mental traz o minuto exato. Ao clicar, o player embutido salta direto para o ponto da explicação.</p>
+          </li>
+
+          <li class="bento__card reveal">
+            <span class="bento__kicker">MULTIMODAL REAL</span>
+            <h3 class="bento__title">Visão além da legenda</h3>
+            <p class="bento__text">Slides, lousas, gráficos e blocos de código exibidos na tela entram na síntese mesmo quando não são lidos em voz alta.</p>
+          </li>
+
+          <li class="bento__card reveal">
+            <span class="bento__kicker">ZERO TOKENS EXTRAS</span>
+            <h3 class="bento__title">Mapa mental vetorial</h3>
+            <p class="bento__text">Árvore interativa com recolhimento para Active Recall, expansão de sub-nós via IA e exportação limpa em PNG HD ou SVG.</p>
+          </li>
+
+          <li class="bento__card reveal">
+            <span class="bento__kicker">DEFINIÇÕES &amp; FÓRMULAS</span>
+            <h3 class="bento__title">Glossário técnico automático</h3>
+            <p class="bento__text">Conceitos fundamentais, siglas e expressões matemáticas aparecem isolados em cartões de consulta rápida.</p>
+          </li>
+
+          <li class="bento__card reveal">
+            <span class="bento__kicker">TUTOR INTELIGENTE</span>
+            <h3 class="bento__title">Pergunte ao vídeo ou a um minuto</h3>
+            <p class="bento__text">Cite um trecho como <code>14:20</code> e o agente reinspeciona cirurgicamente apenas aquela janela do vídeo.</p>
+          </li>
+
+          <li class="bento__card bento__card--accent reveal">
+            <span class="bento__kicker">ARQUITETURA LOCAL-FIRST</span>
+            <h3 class="bento__title">Privacidade total e exportação aberta em Markdown</h3>
+            <p class="bento__text">Chave Gemini e histórico permanecem no seu navegador — sem servidor intermediário. Copie ou baixe <code>.md</code> pronto para Obsidian, Notion ou GitHub.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="pulse-rule" aria-hidden="true"></div>
+
+    <!-- =================================================================
+         00:03 — Modos de resumo
+         ================================================================= -->
+    <section id="modos" class="section" aria-labelledby="modes-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__tc">00:03 <span>Modos de síntese</span></p>
+          <h2 id="modes-title" class="section-head__title">Quatro lentes para <em class="serif-accent">dominar</em> o mesmo vídeo.</h2>
+          <p class="section-head__lead">Selecione a lente ideal para o seu objetivo: triagem executiva rápida, apostila universitária profunda, checklist prático ou índice temporal.</p>
+        </header>
+
+        <ul class="modes reveal">
+          <li class="modes__row">
+            <span class="modes__idx">A</span>
+            <div class="modes__body">
+              <h3 class="modes__title">Executivo <span>TL;DR · DECISÃO</span></h3>
+              <p class="modes__text">Tese central cristalina, argumentos essenciais e conclusão direta para avaliar vídeos longos em dois minutos.</p>
+            </div>
+            <button type="button" class="btn btn--outline btn--sm" data-select-mode="executive">Selecionar modo</button>
+          </li>
+          <li class="modes__row">
+            <span class="modes__idx">B</span>
+            <div class="modes__body">
+              <h3 class="modes__title">Aula &amp; estudo <span>DIDÁTICO · TEORIA</span></h3>
+              <p class="modes__text">Cobertura exaustiva de definições, fórmulas, demonstrações em slides e glossário completo para provas e pesquisa.</p>
+            </div>
+            <button type="button" class="btn btn--outline btn--sm" data-select-mode="deep_study">Selecionar modo</button>
+          </li>
+          <li class="modes__row">
+            <span class="modes__idx">C</span>
+            <div class="modes__body">
+              <h3 class="modes__title">Insights práticos <span>EXECUÇÃO · FRAMEWORKS</span></h3>
+              <p class="modes__text">Extrai ferramentas citadas, recomendações acionáveis, armadilhas comuns e plano passo a passo.</p>
+            </div>
+            <button type="button" class="btn btn--outline btn--sm" data-select-mode="actionable">Selecionar modo</button>
+          </li>
+          <li class="modes__row">
+            <span class="modes__idx">D</span>
+            <div class="modes__body">
+              <h3 class="modes__title">Roteiro temporal <span>CRONOLÓGICO · CENA A CENA</span></h3>
+              <p class="modes__text">Mapeamento minucioso do início ao fim com timestamps precisos e descrição visual do que aparece na tela.</p>
+            </div>
+            <button type="button" class="btn btn--outline btn--sm" data-select-mode="chronological">Selecionar modo</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         00:04 — Para quem
+         ================================================================= -->
+    <section id="para-quem" class="section section--tight" aria-labelledby="audience-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__tc">00:04 <span>Para quem</span></p>
+          <h2 id="audience-title" class="section-head__title">Projetado para quem transforma vídeo em <em class="serif-accent">conhecimento</em>.</h2>
+        </header>
+
+        <ul class="audiences reveal">
+          <li>
+            <h3>Estudantes &amp; concurseiros</h3>
+            <p>Converta aulas extensas em apostilas com glossário, mapa mental para revisão ativa e quiz comentado.</p>
+          </li>
+          <li>
+            <h3>Engenheiros &amp; devs</h3>
+            <p>Capture arquiteturas, comandos de terminal, bibliotecas e trechos de código mostrados em talks técnicas.</p>
+          </li>
+          <li>
+            <h3>Líderes &amp; produto</h3>
+            <p>Destile keynotes, análises de mercado e webinars de 90 minutos em briefings executivos compartilháveis.</p>
+          </li>
+          <li>
+            <h3>Pesquisadores &amp; criadores</h3>
+            <p>Indexe entrevistas, seminários e documentários com citações rastreáveis por minuto e segundo.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="pulse-rule" aria-hidden="true"></div>
+
+    <!-- =================================================================
+         00:05 — FAQ (1:1 com FAQPage Schema.org)
+         ================================================================= -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container faq">
+        <header class="section-head reveal">
+          <p class="section-head__tc">00:05 <span>Perguntas frequentes</span></p>
+          <h2 id="faq-title" class="section-head__title">Respostas <em class="serif-accent">diretas</em>.</h2>
+          <p class="section-head__lead">Tudo o que você precisa saber sobre leitura multimodal, privacidade da chave Gemini e exportação.</p>
+        </header>
+
+        <div class="faq__list reveal">
+          <details class="faq__item" name="faq" open>
+            <summary><h3>Como resumir um vídeo do YouTube com o PulseTube AI?</h3></summary>
+            <p>Cole o link público do vídeo no campo principal, escolha o modo de resumo desejado e clique em <strong>Resumir vídeo</strong>. Em segundos você recebe a visão geral, glossário, módulos-chave, capítulos com timestamps clicáveis e um mapa mental interativo.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary><h3>O PulseTube AI funciona com vídeos privados ou não listados?</h3></summary>
+            <p>A leitura multimodal direta funciona com vídeos públicos. Para vídeos privados, restritos ou não listados, abra o painel <strong>Foco &amp; Plano B</strong>, cole a transcrição do vídeo e gere a mesma síntese completa.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary><h3>Como funciona o Mapa Mental interativo?</h3></summary>
+            <p>Todo resumo gera automaticamente um mapa mental vetorial sem consumir tokens extras. Você pode navegar com zoom, recolher ramos para revisão ativa (<em>Active Recall</em>), editar ou criar nós, expandir tópicos com IA e baixar em PNG de alta resolução ou SVG.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary><h3>Preciso de uma chave da API do Google Gemini?</h3></summary>
+            <p>Sim. O PulseTube AI conecta-se diretamente ao endpoint oficial do Google Gemini a partir do seu navegador. Sua chave fica armazenada apenas em <code>localStorage</code> no seu próprio dispositivo.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary><h3>Em quais idiomas posso gerar os resumos?</h3></summary>
+            <p>Você pode gerar a síntese em Português do Brasil, Inglês ou Espanhol, mesmo quando o áudio original do vídeo está em outro idioma.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary><h3>Posso exportar o resumo e o mapa mental para minhas notas?</h3></summary>
+            <p>Sim. Copie o resumo estruturado em Markdown com um clique, baixe o arquivo <code>.md</code> pronto para Notion ou Obsidian, e exporte o mapa mental em SVG vetorial ou PNG Retina.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         Closing Brand Stage CTA
+         ================================================================= -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container cta__inner reveal">
+        <svg class="cta__mark" width="76" height="76" aria-hidden="true"><use href="#pt-mark" /></svg>
+        <h2 id="cta-title" class="cta__title">Uma aula de uma hora cabe em <em class="serif-accent">três minutos</em> de estudo focado.</h2>
+        <a href="#resumir" class="btn btn--primary btn--lg" data-focus-input>
+          <span>Resumir um vídeo agora</span>
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow" /></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <a href="#inicio" class="brand" aria-label="PulseTube AI — voltar ao topo">
+          <svg class="brand__mark" width="30" height="30" aria-hidden="true"><use href="#pt-mark" /></svg>
+          <span class="brand__name">PulseTube<span class="brand__ai">AI</span></span>
+        </a>
+        <p class="site-footer__tagline">Assista menos. Aprenda com pulso.</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Links do rodapé">
+        <a href="#resumir" data-focus-input>Resumidor</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#modos">Modos</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <p class="site-footer__legal">
+        <small>© 2026 PulseTube AI · Estudo multimodal local-first com Google Gemini API. Projeto independente, sem vínculo oficial com o YouTube.</small>
+      </p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

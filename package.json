@@ -1,0 +1,22 @@
+{
+  "name": "pulsetube-videoresume",
+  "private": true,
+  "version": "2.0.0",
+  "description": "PulseTube AI — resumidor multimodal de vídeos do YouTube com Google Gemini.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "devDependencies": {
+    "browserslist": "^4.29.5",
+    "lightningcss": "^1.33.0",
+    "vite": "^8.3.7"
+  }
+}

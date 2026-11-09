@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 7 54 56">
+  <style>
+    .lt { fill: #f5f5f5; stroke: #f5f5f5; }
+    .s-lt { stop-color: #f5f5f5; }
+    @media (prefers-color-scheme: light) {
+      .lt { fill: #0b0b0c; stroke: #0b0b0c; }
+      .s-lt { stop-color: #0b0b0c; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="g" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" class="s-lt" />
+      <stop offset=".36" class="s-lt" />
+      <stop offset=".64" stop-color="#ff2638" />
+      <stop offset="1" stop-color="#ff2638" />
+    </linearGradient>
+  </defs>
+  <path d="M23 26 L52 42 L23 58 Z" fill="none" stroke="url(#g)" stroke-width="6.5" stroke-linejoin="round" />
+  <polyline points="27,42 32,42 34.5,37 37.5,47 40.5,39.5 42.5,42 46,42" class="lt" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="fill:none" />
+  <polygon points="8,17 27,10 44,15 25,22" class="lt" style="stroke:none" />
+  <line x1="12" y1="18.5" x2="12" y2="28" class="lt" stroke-width="1.6" />
+  <rect x="10.4" y="27" width="3.2" height="6" rx="1.2" class="lt" style="stroke:none" />
+</svg>
